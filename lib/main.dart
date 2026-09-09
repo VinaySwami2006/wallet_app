@@ -537,8 +537,8 @@ Future<void> payMoney(
   // For Wallet QR, upiId contains the receiver Wallet ID.
   final receiverWalletId =
       (upiId != null &&
-              upiId!.startsWith('WLT-'))
-          ? upiId!
+              upiId.startsWith('WLT-'))
+          ? upiId
           : name;
 
   await payMoney(

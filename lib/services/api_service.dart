@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 
 class ApiService {
   // Android Emulator
-  static const String baseUrl = 'http://10.132.248.185:3000';
+  static const String baseUrl = 'http://172.16.5.25:3000';
 
   // Get user by ID
   static Future<Map<String, dynamic>> getUser(int userId) async {

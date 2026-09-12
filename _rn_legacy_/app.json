@@ -1,0 +1,24 @@
+{
+  "expo": {
+    "name": "expo_wallet_app",
+    "slug": "expo_wallet_app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.expo-wallet-app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png"
+      },
+      "package": "com.anonymous.expo_wallet_app"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["src/**/*.ts", "src/**/*.tsx", "App.tsx", "index.ts", "nativewind-env.d.ts"],
+  "exclude": ["node_modules", "_rn_legacy_"]
+}

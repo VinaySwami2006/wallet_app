@@ -8,7 +8,10 @@
     "userInterfaceStyle": "light",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.walletrn"
+      "bundleIdentifier": "com.anonymous.walletrn",
+      "infoPlist": {
+        "NSCameraUsageDescription": "We use the camera to scan wallet QR codes so you can send money to friends."
+      }
     },
     "android": {
       "adaptiveIcon": {

@@ -117,6 +117,10 @@ export default function App() {
     setSendWalletId(defaultWalletId);
     setSendAmount('');
     setSendMoneyModal(true);
+    // If we're on the scan tab, switch back to home so the modal is visible
+    if (currentTab === 'scan') {
+      setCurrentTab('home');
+    }
   };
 
   const handleSendMoney = async () => {
@@ -202,7 +206,7 @@ export default function App() {
   if (showOnboarding) {
     return (
       <>
-        <StatusBar style="light" />
+        <StatusBar style="dark" />
         <OnboardingWelcomeScreen
           onGetStarted={completeOnboarding}
           onSignIn={completeOnboarding}
@@ -213,7 +217,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <StatusBar style="light" />
+      <StatusBar style="dark" />
 
       {/* Screen container: keep screens mounted so tab switching is instant and glitch-free */}
       <View style={styles.screenContainer}>
@@ -232,7 +236,6 @@ export default function App() {
             onTransactionTap={showTransactionDetail}
             onProfileTap={() => setCurrentTab('profile')}
             onNotificationTap={() => Alert.alert('Notifications', 'Coming soon')}
-            onLockedCardTap={(card) => Alert.alert('Card locked', `Card •••• ${card.last4} is locked.`)}
           />
         </View>
 
@@ -241,7 +244,7 @@ export default function App() {
         </View>
 
         <View style={[styles.screenWrapper, currentTab !== 'scan' && styles.hiddenScreen]}>
-          <ScanScreen user={user} />
+          <ScanScreen user={user} onRecipientDetected={openSendMoneyModal} />
         </View>
 
         <View style={[styles.screenWrapper, currentTab !== 'rewards' && styles.hiddenScreen]}>
@@ -436,30 +439,29 @@ const DetailRow: React.FC<DetailRowProps> = ({ label, value }) => (
  * quick actions, and the AI banner, using shimmering Skeleton blocks.
  */
 const SkeletonHomeScreen: React.FC = () => {
-  const dark = AppColors.dark;
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: dark.background }]}>
+    <SafeAreaView style={[styles.container, { backgroundColor: '#FFFFFF' }]}>
       <View style={styles.skPage}>
         {/* Greeting pill */}
         <View style={[styles.skRow, { alignItems: 'center' }]}>
-          <Skeleton className="h-[42px] w-[42px] rounded-full bg-[#2A3446]" />
-          <Skeleton className="ml-3 h-[20px] w-36 rounded-md bg-[#2A3446]" />
-          <Skeleton className="ml-auto h-[42px] w-[42px] rounded-full bg-[#2A3446]" />
+          <Skeleton className="h-[42px] w-[42px] rounded-full bg-[#F3F4F6]" />
+          <Skeleton className="ml-3 h-[20px] w-36 rounded-md bg-[#F3F4F6]" />
+          <Skeleton className="ml-auto h-[42px] w-[42px] rounded-full bg-[#F3F4F6]" />
         </View>
 
         {/* Balance */}
-        <Skeleton className="mt-8 h-[14px] w-28 rounded-md bg-[#2A3446]" />
-        <Skeleton className="mt-3 h-[42px] w-64 rounded-lg bg-[#2A3446]" />
+        <Skeleton className="mt-8 h-[14px] w-28 rounded-md bg-[#F3F4F6]" />
+        <Skeleton className="mt-3 h-[42px] w-64 rounded-lg bg-[#F3F4F6]" />
 
-        {/* Quick actions (4 circles) */}
+        {/* Quick actions (3 circles) */}
         <View style={styles.skRow}>
-          {Array.from({ length: 4 }).map((_, i) => (
-            <Skeleton key={i} className="h-[60px] w-[60px] rounded-full bg-[#2A3446]" />
+          {Array.from({ length: 3 }).map((_, i) => (
+            <Skeleton key={i} className="h-[60px] w-[60px] rounded-full bg-[#F3F4F6]" />
           ))}
         </View>
 
-        {/* AI banner */}
-        <Skeleton className="mt-7 h-[70px] w-full rounded-[20px] bg-[#2A3446]" />
+        {/* Transactions block */}
+        <Skeleton className="mt-7 h-[200px] w-full rounded-[20px] bg-[#F3F4F6]" />
       </View>
     </SafeAreaView>
   );
@@ -468,7 +470,7 @@ const SkeletonHomeScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0B0D29',
+    backgroundColor: '#FFFFFF',
   },
   screenContainer: {
     flex: 1,
@@ -483,13 +485,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#0B0D29',
+    backgroundColor: '#FFFFFF',
   },
   skPage: {
     flex: 1,
     paddingHorizontal: 20,
     paddingTop: 12,
-    backgroundColor: '#0B0D29',
+    backgroundColor: '#FFFFFF',
   },
   skRow: {
     flexDirection: 'row',

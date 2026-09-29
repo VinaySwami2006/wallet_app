@@ -5,7 +5,8 @@ const { Pool } = require("pg");
 
 const userRoutes = require("./routes/userRoutes");
 const transactionRoutes = require("./routes/transactionRoutes");
-dotenv.config();
+const bankRoutes = require("./routes/bankRoutes");
+dotenv.config({ path: "./backend/.env" });
 
 const app = express();
 
@@ -46,6 +47,7 @@ app.get("/api/health", async (req, res) => {
 });
 app.use("/api/users", userRoutes);
 app.use("/api/transactions", transactionRoutes);
+app.use("/api/banks", bankRoutes);
 
 const PORT = process.env.PORT || 3000;
 

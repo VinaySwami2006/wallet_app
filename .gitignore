@@ -49,3 +49,17 @@ app.*.map.json
 
 # Node / React Native
 node_modules/
+# Environment / secrets
+.env
+.env.*
+
+# Expo generated files
+.expo/
+
+# React Native generated files
+android/app/src/main/java/io/
+linux/
+macos/
+windows/
+ios/Flutter/
+ios/Runner/

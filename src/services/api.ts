@@ -11,6 +11,21 @@ const apiClient = axios.create({
 });
 
 class ApiService {
+  async verifyBankAccount(
+  requestId: number,
+  ifsc: string,
+  accountNumber: string
+) {
+  const response = await apiClient.post(
+    `/api/banks/verify/${requestId}`,
+    {
+      ifsc,
+      accountNumber,
+    }
+  );
+
+  return response.data;
+}
   async getUserByWalletId(walletId: string) {
     const response = await apiClient.get(`/api/users/wallet/${walletId}`);
     return response.data;
@@ -32,6 +47,26 @@ class ApiService {
       receiverWalletId,
       amount,
       description,
+    });
+    return response.data;
+  }
+    // Get all active banks
+  async getBanks() {
+    const response = await apiClient.get('/api/banks');
+    return response.data;
+  }
+
+  // Get bank accounts linked to a user
+  async getUserBankAccounts(userId: number) {
+    const response = await apiClient.get(`/api/banks/accounts/${userId}`);
+    return response.data;
+  }
+
+  // Start a bank-link request
+  async createBankLinkRequest(userId: number, bankId: number) {
+    const response = await apiClient.post('/api/banks/link', {
+      userId,
+      bankId,
     });
     return response.data;
   }
